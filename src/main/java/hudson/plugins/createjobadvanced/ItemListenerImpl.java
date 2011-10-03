@@ -105,7 +105,8 @@ public class ItemListenerImpl extends ItemListener {
 
 		for (DynamicPermissionConfig dpc : cja.getDynamicPermissionConfigs()) {
 			MessageFormat format = new MessageFormat(dpc.getGroupFormat());
-			final String newName = format.format(groupsList.toArray(new String[0]));
+			final String newName = formatGroup(format, dpc.getToLowerCase(), dpc.getToUpperCase(), groupsList);
+                        
 			log.log(Level.FINE, "add perms for group: " + newName);
 
 			final Set<String> permissions = dpc.getCheckedPermissionIds();
@@ -119,6 +120,13 @@ public class ItemListenerImpl extends ItemListener {
 		}
 	}
 
+        private String formatGroup(MessageFormat messageFormat, Boolean toLowerCase, Boolean toUpperCase, List<String> groupsList) {
+            String newName = messageFormat.format(groupsList.toArray(new String[0]));
+            newName = toLowerCase ? newName.toLowerCase() : toUpperCase ? newName.toUpperCase() : newName;
+            
+            return newName;
+        }
+        
 	private void activateLogRotator(final Job<?, ?> job, final CreateJobAdvancedPlugin cja) {
 
 		// if template, it's possible that log rotator is already defined

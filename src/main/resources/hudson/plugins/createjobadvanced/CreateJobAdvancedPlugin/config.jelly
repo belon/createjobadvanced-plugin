@@ -38,15 +38,23 @@
 					<f:entry title="${%Job name pattern}">
 						<f:textbox name="cja.extractPattern" value="${it.extractPattern}" />
 					</f:entry>
-					
-					<f:entry title="${groups}">
+                                        
+                                        <f:entry title="${groups}">
 					    <f:repeatable var="dynCfg" items="${it.dynamicPermissionConfigs}" name="cfgs" noAddButton="true" minimum="1">
 					      <table width="100%">
 					      
 							<f:entry title="${%Group format}" >
 								<f:textbox name="groupFormat" value="${dynCfg.groupFormat}" />
 							</f:entry>
-							
+                                                        
+                                                        <f:entry title="${%Group format to upper case}">
+                                                                <f:checkbox name="toUpperCase" checked="${dynCfg.toUpperCase}" />
+                                                        </f:entry>
+                                                        
+                                                        <f:entry title="${%Group format to lower case}">
+                                                                <f:checkbox name="toLowerCase" checked="${dynCfg.toLowerCase}" />
+                                                        </f:entry>
+                                                        
 							<f:entry title="${%Permissions}" name="checkedPermissions" >
 								<j:forEach var="perm" items="${it.allPossiblePermissions}" >
 									<j:out value="${perm.name} (${perm.group.title})" />: <f:checkbox name="[${perm.id}]" value="[${perm.id}]" checked="${dynCfg.isPermissionChecked(perm)}"/>

@@ -11,10 +11,16 @@ public class DynamicPermissionConfig {
 	private String groupFormat;
 
 	private Set<String> checkedPermissionIds = new HashSet<String>();
+        
+        private Boolean toUpperCase;
+        
+        private Boolean toLowerCase;
 
 	@DataBoundConstructor
-	public DynamicPermissionConfig(String groupFormat, Set<String> checkedPermissionIds) {
+	public DynamicPermissionConfig(String groupFormat, Boolean toUpperCase, Boolean toLowerCase, Set<String> checkedPermissionIds) {
 		this.groupFormat = groupFormat;
+                this.toUpperCase = toUpperCase;
+                this.toLowerCase = toLowerCase;
 		if (checkedPermissionIds != null) {
 			this.checkedPermissionIds = checkedPermissionIds;
 		}
@@ -31,6 +37,20 @@ public class DynamicPermissionConfig {
 		return groupFormat;
 	}
 
+        /**
+	 * @return the toLowerCase
+	 */
+        public Boolean getToLowerCase() {
+            return toLowerCase;
+        }
+
+        /**
+	 * @return the toUpperCase
+	 */
+        public Boolean getToUpperCase() {
+            return toUpperCase;
+        }
+
 	/**
 	 * @return the checkedPermissionIds
 	 */
@@ -44,6 +64,6 @@ public class DynamicPermissionConfig {
 
 	@Override
 	public String toString() {
-		return "[DynamicPermissionConfig: " + groupFormat + ", permissions: " + checkedPermissionIds + "]";
+		return "[DynamicPermissionConfig: " + groupFormat + ", toUpperCase: " + toUpperCase + ", toLowerCase: " + toLowerCase + ", permissions: " + checkedPermissionIds + "]";
 	}
 }
